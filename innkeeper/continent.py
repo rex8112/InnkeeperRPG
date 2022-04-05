@@ -1,21 +1,25 @@
+from typing import List, Dict, Union
+
 from .world import World
+from .town import Town
 
 class Continent:
     def __init__(self, world: World) -> None:
+        self.id = None
         self.world = world
         self.name = 'New Continent'
         self.size = 100
         self.population = 0
-        self.towns = []
+        self.towns: List[Town] = []
         self.flags = []
 
     # Serialization
-    def toJSON(self):
+    def toJSON(self) -> Dict[str, Union[str, int, float, None]]:
         return {
             'name': self.name,
             'size': self.size,
             'population': self.population,
-            'towns': self.towns,
+            'towns': [town.id for town in self.towns],
             'flags': self.flags,
         }
 
