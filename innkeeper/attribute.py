@@ -165,3 +165,9 @@ class Attribute:
     # Methods
     def to_dict(self) -> dict:
         return {'name': self.name, 'value': self.value}
+
+    def get_value(self) -> float:
+        return self.value
+
+    def set_value(self, value: float) -> None:
+        self.value = value

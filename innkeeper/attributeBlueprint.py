@@ -1,3 +1,4 @@
+from typing import Union
 import numpy
 import random
 
@@ -36,7 +37,7 @@ class AttributeBlueprint:
         else:
             self.modifier = value - self.min
 
-    def randomize(self) -> None:
+    def randomize(self) -> Union[float, int]:
         """Randomize the value.
         
         This will generate a list of ten values evenly spaced between the min and max, including both endpoints.
@@ -53,7 +54,12 @@ class AttributeBlueprint:
         elif self.type == 'float':
             new_value = numpy.round(new_value, 2)
         self.set_value(new_value)
+        return new_value
 
     def get_attribute(self) -> Attribute:
         """Get the value as an Attribute."""
         return Attribute(self.name, self.get_value())
+
+    def get_copy(self) -> 'AttributeBlueprint':
+        """Get a copy of the blueprint."""
+        return AttributeBlueprint(self.name, self.min, self.max, self.modifier, self.type)
