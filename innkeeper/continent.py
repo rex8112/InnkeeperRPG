@@ -13,8 +13,7 @@ class Continent:
         self.towns: List[Town] = []
         self.flags = []
 
-    # Serialization
-    def toJSON(self) -> Dict[str, Union[str, int, float, None]]:
+    def to_dict(self) -> Dict[str, Union[str, int, float, None]]:
         return {
             'name': self.name,
             'size': self.size,
@@ -23,9 +22,8 @@ class Continent:
             'flags': self.flags,
         }
 
-    # Deserialization
     @classmethod
-    def fromJSON(cls, world: World, data: dict):
+    def from_dict(cls, world: World, data: dict):
         continent = cls(world)
         continent.name = data['name']
         continent.size = data['size']

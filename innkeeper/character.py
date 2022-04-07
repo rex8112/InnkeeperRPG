@@ -13,8 +13,7 @@ class Character:
         self.currency = {}
         self.flags = []
 
-    # Serialization
-    def toJSON(self):
+    def to_dict(self):
         return {
             'name': self.name,
             'level': self.level,
@@ -27,9 +26,8 @@ class Character:
             'flags': self.flags,
         }
 
-    # Deserialization
     @classmethod
-    def fromJSON(cls, world: World, data: dict):
+    def from_dict(cls, world: World, data: dict):
         character = cls(world)
         character.name = data['name']
         character.level = data['level']

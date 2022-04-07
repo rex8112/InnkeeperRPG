@@ -13,8 +13,7 @@ class Town:
         self.kingdom = None
         self.flags = []
 
-    # Serialization
-    def toJSON(self):
+    def to_dict(self):
         return {
             'name': self.name,
             'size': self.size,
@@ -24,9 +23,8 @@ class Town:
             'flags': self.flags,
         }
 
-    # Deserialization
     @classmethod
-    def fromJSON(cls, world: World, continent: Continent, data: dict):
+    def from_dict(cls, world: World, continent: Continent, data: dict):
         town = cls(world, continent)
         town.name = data['name']
         town.size = data['size']

@@ -13,8 +13,7 @@ class Kingdom:
         self.army = 0
         self.flags = []
 
-    # Serialization
-    def toJSON(self) -> Dict[str, Union[str, int, List[str], None]]:
+    def to_dict(self) -> Dict[str, Union[str, int, List[str], None]]:
         return {
             'name': self.name,
             'ruler': self.ruler.id if self.ruler else None,
@@ -23,10 +22,9 @@ class Kingdom:
             'army': self.army,
             'flags': self.flags,
         }
-
-    # Deserialization
+        
     @classmethod
-    def fromJSON(cls, world: World, data: dict):
+    def from_dict(cls, world: World, data: dict):
         kingdom = cls(world)
         kingdom.name = data['name']
         kingdom.ruler = data['ruler']
