@@ -1,12 +1,13 @@
-from typing import List, Dict, Union
+from typing import Dict, List, Union
 
-from .world import World
+from .base_classes.InnkeeperBase import BaseObject
 from .town import Town
+from .world import World
 
-class Continent:
+
+class Continent(BaseObject):
     def __init__(self, world: World) -> None:
-        self.id = None
-        self.world = world
+        super.__init__(world)
         self.name = 'New Continent'
         self.size = 100
         self.population = 0
@@ -16,6 +17,7 @@ class Continent:
     @classmethod
     def from_dict(cls, world: World, data: dict):
         continent = cls(world)
+        continent.id = data['id']
         continent.name = data['name']
         continent.size = data['size']
         continent.population = data['population']

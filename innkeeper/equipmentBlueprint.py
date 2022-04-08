@@ -1,10 +1,11 @@
 from typing import Dict, List
+from .base_classes.InnkeeperBase import BaseObject
 from .world import World
 from .attributeBlueprint import AttributeBlueprint
 
-class EquipmentBlueprint:
+class EquipmentBlueprint(BaseObject):
     def __init__(self, world: World):
-        self.world = world
+        super.__init__(world)
         self.name = 'New Equipment Blueprint'
         self.min_level = 1
         self.max_level = 10
@@ -16,6 +17,7 @@ class EquipmentBlueprint:
     @classmethod
     def from_dict(cls, world: World, data: dict):
         blueprint = cls(world)
+        blueprint.id = data['id']
         blueprint.name = data['name']
         blueprint.min_level = data['min_level']
         blueprint.max_level = data['max_level']

@@ -1,6 +1,7 @@
-from typing import Union
-import numpy
 import random
+from typing import Union
+
+import numpy
 
 from .attribute import Attribute
 

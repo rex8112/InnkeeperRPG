@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ..exceptions import NotFound
+from ..exceptions import NotFoundError
 from ..world import World
 
 class CacheManager:
@@ -28,7 +28,7 @@ class CacheManager:
             if value:
                 self._add_to_cache(key, value)
             else:
-                raise NotFound(f"{key} not found")
+                raise NotFoundError(f"{key} not found")
         else:
             value = self.get(key)
         return value

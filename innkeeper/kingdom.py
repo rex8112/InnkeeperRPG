@@ -1,11 +1,13 @@
 from typing import Dict, List, Union
-from .world import World
-from .continent import Continent
 
-class Kingdom:
+from .base_classes.InnkeeperBase import BaseObject
+from .continent import Continent
+from .world import World
+
+
+class Kingdom(BaseObject):
     def __init__(self, world: World) -> None:
-        self.id = None
-        self.world = world
+        super.__init__(world)
         self.name = 'New Kingdom'
         self.ruler = None
         self.land = {}

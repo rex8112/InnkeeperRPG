@@ -1,8 +1,10 @@
+from .base_classes.InnkeeperBase import BaseObject
 from .world import World
 
-class Character:
+
+class Character(BaseObject):
     def __init__(self, world: World):
-        self.world = world
+        super.__init__(world)
         self.name = 'New Character'
         self.level = 0
         self.attributes = {}
@@ -16,6 +18,7 @@ class Character:
     @classmethod
     def from_dict(cls, world: World, data: dict):
         character = cls(world)
+        character.id = data['id']
         character.name = data['name']
         character.level = data['level']
         character.attributes = data['attributes']

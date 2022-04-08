@@ -1,10 +1,11 @@
-from .world import World
+from .base_classes.InnkeeperBase import BaseObject
 from .continent import Continent
+from .world import World
+
 
 class Town:
     def __init__(self, world: World, continent: Continent):
-        self.id = None
-        self.world = world
+        super.__init__(world)
         self.continent = continent
         self.name = 'New Town'
         self.size = 10
