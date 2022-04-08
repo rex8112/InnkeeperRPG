@@ -13,16 +13,6 @@ class Town:
         self.kingdom = None
         self.flags = []
 
-    def to_dict(self):
-        return {
-            'name': self.name,
-            'size': self.size,
-            'population': self.population,
-            'owner': self.owner.toJSON() if self.owner else None,
-            'kingdom': self.kingdom.toJSON() if self.kingdom else None,
-            'flags': self.flags,
-        }
-
     @classmethod
     def from_dict(cls, world: World, continent: Continent, data: dict):
         town = cls(world, continent)
@@ -33,3 +23,13 @@ class Town:
         town.kingdom = data['kingdom']
         town.flags = data['flags']
         return town
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'size': self.size,
+            'population': self.population,
+            'owner': self.owner.toJSON() if self.owner else None,
+            'kingdom': self.kingdom.toJSON() if self.kingdom else None,
+            'flags': self.flags,
+        }

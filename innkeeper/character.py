@@ -13,19 +13,6 @@ class Character:
         self.currency = {}
         self.flags = []
 
-    def to_dict(self):
-        return {
-            'name': self.name,
-            'level': self.level,
-            'attributes': self.attributes,
-            'equipment': self.equipment,
-            'inventory': self.inventory,
-            'location': self.location,
-            'activity': self.activity,
-            'currency': self.currency,
-            'flags': self.flags,
-        }
-
     @classmethod
     def from_dict(cls, world: World, data: dict):
         character = cls(world)
@@ -39,3 +26,16 @@ class Character:
         character.currency = data['currency']
         character.flags = data['flags']
         return character
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'level': self.level,
+            'attributes': self.attributes,
+            'equipment': self.equipment,
+            'inventory': self.inventory,
+            'location': self.location,
+            'activity': self.activity,
+            'currency': self.currency,
+            'flags': self.flags,
+        }

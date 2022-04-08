@@ -13,6 +13,10 @@ class AttributeBlueprint:
         self.min = min
         self.modifier = modifier
 
+    @classmethod
+    def from_dict(cls, data: dict) -> 'AttributeBlueprint':
+        return cls(data['name'], data['min'], data['max'], data['modifier'], data['type'])
+
     def to_dict(self) -> dict:
         return {
             'name': self.name,
@@ -21,10 +25,6 @@ class AttributeBlueprint:
             'min': self.min,
             'modifier': self.modifier
         }
-
-    @classmethod
-    def from_dict(cls, data: dict) -> 'AttributeBlueprint':
-        return cls(data['name'], data['min'], data['max'], data['modifier'], data['type'])
 
     def get_value(self) -> float:
         return self.modifier + self.min

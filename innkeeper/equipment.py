@@ -14,16 +14,6 @@ class Equipment:
         self.slot = 'none'
         self.flags = []
 
-    def to_dict(self) -> Dict:
-        return {
-            'name': self.name,
-            'blueprint': self.blueprint.id if self.blueprint else None,
-            'level': self.level,
-            'attributes': self.attributeBlueprints,
-            'slot': self.slot,
-            'flags': self.flags,
-        }
-
     @classmethod
     def from_dict(cls, world: World, data: dict) -> 'Equipment':
         equipment = cls(world)
@@ -40,6 +30,16 @@ class Equipment:
 
         equipment.load_attributes()
         return equipment
+
+    def to_dict(self) -> Dict:
+        return {
+            'name': self.name,
+            'blueprint': self.blueprint.id if self.blueprint else None,
+            'level': self.level,
+            'attributes': self.attributeBlueprints,
+            'slot': self.slot,
+            'flags': self.flags,
+        }
 
     def load_attributes(self):
         """Load the attributes from the blueprint."""

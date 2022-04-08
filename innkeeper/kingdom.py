@@ -12,16 +12,6 @@ class Kingdom:
         self.population = 0
         self.army = 0
         self.flags = []
-
-    def to_dict(self) -> Dict[str, Union[str, int, List[str], None]]:
-        return {
-            'name': self.name,
-            'ruler': self.ruler.id if self.ruler else None,
-            'land': self.land,
-            'population': self.population,
-            'army': self.army,
-            'flags': self.flags,
-        }
         
     @classmethod
     def from_dict(cls, world: World, data: dict):
@@ -33,3 +23,13 @@ class Kingdom:
         kingdom.army = data['army']
         kingdom.flags = data['flags']
         return kingdom
+
+    def to_dict(self) -> Dict[str, Union[str, int, List[str], None]]:
+        return {
+            'name': self.name,
+            'ruler': self.ruler.id if self.ruler else None,
+            'land': self.land,
+            'population': self.population,
+            'army': self.army,
+            'flags': self.flags,
+        }
