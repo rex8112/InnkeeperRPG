@@ -1,6 +1,6 @@
 from typing import Dict, List, Union
 
-from .base_classes.InnkeeperBase import BaseObject
+from .base_classes.base_object import BaseObject
 from .town import Town
 from .world import World
 

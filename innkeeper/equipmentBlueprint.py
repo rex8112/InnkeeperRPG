@@ -1,5 +1,5 @@
 from typing import Dict, List
-from .base_classes.InnkeeperBase import BaseObject
+from .base_classes.base_object import BaseObject
 from .world import World
 from .attributeBlueprint import AttributeBlueprint
 
