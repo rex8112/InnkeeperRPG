@@ -1,12 +1,15 @@
 from typing import Dict, List
-from .world import World
+
 from .attribute import Attribute
 from .attributeBlueprint import AttributeBlueprint
+from .enums.item_type import ItemType
+from .item import Item
+from .world import World
 
-class Equipment:
+
+class Equipment(Item):
     def __init__(self, world: World):
-        self.world = world
-        self.name = 'New Equipment'
+        super.__init__(world, name='New Equipment', quantity=1, type=ItemType.EQUIPMENT)
         self.blueprint = None
         self.level = 0
         self.attributes: Dict[str, Attribute] = {}
@@ -17,6 +20,7 @@ class Equipment:
     @classmethod
     def from_dict(cls, world: World, data: dict) -> 'Equipment':
         equipment = cls(world)
+        equipment.id = data['id']
         equipment.name = data['name']
         equipment.blueprint = data['blueprint']
         equipment.level = data['level']

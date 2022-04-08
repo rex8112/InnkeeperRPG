@@ -1,5 +1,12 @@
-class InnkeeperException(Exception):
+class InnkeeperError(Exception):
     pass
 
-class NotFound(InnkeeperException):
+class NotFoundError(InnkeeperError):
+    pass
+
+# Item Exceptions
+class ItemError(InnkeeperError):
+    pass
+
+class UnstackableError(ItemError):
     pass
