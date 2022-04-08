@@ -44,7 +44,7 @@ class Equipment:
     def load_attributes(self):
         """Load the attributes from the blueprint."""
         self.attributes.clear()
-        for blueprint in self.attributeBlueprints.values():
+        for blueprint in self.attributeBlueprints:
             attribute = blueprint.get_attribute()
             if self.attributes.get(attribute.name):
                 self.attributes[attribute.name] += attribute
