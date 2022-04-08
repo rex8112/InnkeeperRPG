@@ -1,7 +1,9 @@
 from typing import Dict, List
+
+from .attribute_blueprint import AttributeBlueprint
 from .base_classes.base_object import BaseObject
 from .world import World
-from .attributeBlueprint import AttributeBlueprint
+
 
 class EquipmentBlueprint(BaseObject):
     def __init__(self, world: World):

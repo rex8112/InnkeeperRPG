@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 from .attribute import Attribute
-from .attributeBlueprint import AttributeBlueprint
+from .attribute_blueprint import AttributeBlueprint
 from .enums.item_type import ItemType
 from .item import Item
 from .world import World
