@@ -1,8 +1,8 @@
-from typing import List
+from typing import Union
 
 
 class Attribute:
-    def __init__(self, name: str, value: float) -> None:
+    def __init__(self, name: str, value: Union[int, float]) -> None:
         self.name = name
         self.value = value
 
@@ -162,6 +162,11 @@ class Attribute:
     def __abs__(self) -> 'Attribute':
         return Attribute(self.name, abs(self.value))
 
+    #Class methods
+    @classmethod
+    def from_dict(cls, d: dict) -> 'Attribute':
+        return cls(d['name'], d['value'])
+    
     # Methods
     def to_dict(self) -> dict:
         return {'name': self.name, 'value': self.value}
