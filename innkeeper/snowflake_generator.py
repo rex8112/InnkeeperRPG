@@ -14,6 +14,13 @@ class SnowflakeGenerator:
         self.id_counter_lock.acquire()
         self.id_counter_lock.release()
 
+    #Static methods
+    @staticmethod
+    def get_datetime_from_id(id: int) -> datetime.datetime:
+        time_since_start = id >> 22
+        return SnowflakeGenerator.start_date + datetime.timedelta(seconds=time_since_start)
+
+    #Methods
     def get_new_id(self) -> int:
         """Returns a new unique id.
         
@@ -33,10 +40,6 @@ class SnowflakeGenerator:
 
         self.id_counter_lock.release()
         return new_id
-
-    def get_datetime_from_id(self, id: int) -> datetime.datetime:
-        time_since_start = id >> 22
-        return self.start_date + datetime.timedelta(seconds=time_since_start)
 
     def get_time_since_start(self) -> int:
         return int((datetime.datetime.now(datetime.timezone.utc) - self.start_date).total_seconds())
