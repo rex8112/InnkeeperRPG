@@ -1,10 +1,10 @@
 import threading
 import datetime
 
-from ..world import World
+from .world import World
 
 
-class Snowflake:
+class SnowflakeGenerator:
     start_date = datetime.datetime(2022, 1, 1, tzinfo=datetime.timezone.utc)
 
     def __init__(self, worker_id: int) -> None:
@@ -22,7 +22,7 @@ class Snowflake:
         [21-17] Worker id
         [16-0] Id counter"""
         self.id_counter_lock.acquire()
-        
+
         count = self.id_counter
         self.id_counter += 1
         first = self.get_time_since_start() << 22

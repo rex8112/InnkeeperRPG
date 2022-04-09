@@ -1,5 +1,6 @@
 from typing import Dict, List
 
+from .abc import UniqueObject
 from .attribute import Attribute
 from .attribute_blueprint import AttributeBlueprint
 from .enums.item_type import ItemType
@@ -7,9 +8,10 @@ from .item import Item
 from .world import World
 
 
-class Equipment(Item):
-    def __init__(self, world: World):
-        super.__init__(world, name='New Equipment', quantity=1, type=ItemType.EQUIPMENT)
+class Equipment(Item, UniqueObject):
+    def __init__(self, id: int):
+        super.__init__(name='New Equipment', quantity=1, type=ItemType.EQUIPMENT)
+        self.id = id
         self.blueprint = None
         self.level = 0
         self.attributes: Dict[str, Attribute] = {}
@@ -37,6 +39,7 @@ class Equipment(Item):
 
     def to_dict(self) -> Dict:
         return {
+            'id': self.id,
             'name': self.name,
             'blueprint': self.blueprint.id if self.blueprint else None,
             'level': self.level,

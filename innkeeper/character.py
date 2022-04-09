@@ -1,10 +1,11 @@
-from .base_classes.base_object import BaseObject
+from .abc import UniqueObject, WorldObject
 from .world import World
 
 
-class Character(BaseObject):
-    def __init__(self, world: World):
+class Character(UniqueObject, WorldObject):
+    def __init__(self, world: World, id: int):
         super.__init__(world)
+        self.id = id
         self.name = 'New Character'
         self.level = 0
         self.attributes = {}
@@ -32,6 +33,7 @@ class Character(BaseObject):
 
     def to_dict(self):
         return {
+            'id': self.id,
             'name': self.name,
             'level': self.level,
             'attributes': self.attributes,

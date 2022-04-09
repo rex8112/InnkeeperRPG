@@ -1,13 +1,13 @@
 from typing import Dict, List
 
 from .attribute_blueprint import AttributeBlueprint
-from .base_classes.base_object import BaseObject
+from .abc import UniqueObject
 from .world import World
 
 
-class EquipmentBlueprint(BaseObject):
-    def __init__(self, world: World):
-        super.__init__(world)
+class EquipmentBlueprint(UniqueObject):
+    def __init__(self, id: int):
+        self.id = id
         self.name = 'New Equipment Blueprint'
         self.min_level = 1
         self.max_level = 10

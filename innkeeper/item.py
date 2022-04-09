@@ -1,12 +1,10 @@
 from .enums.item_type import ItemType
 from .exceptions import UnstackableError
-from .base_classes.base_object import BaseObject
 from .world import World
 
 
-class Item(BaseObject):
-    def __init__(self, world: World, name: str, quantity: int = 1, type: ItemType = ItemType.MISC):
-        super.__init__(world)
+class Item:
+    def __init__(self, name: str, quantity: int = 1, type: ItemType = ItemType.MISC):
         self.name = name
         self.quantity = quantity
         self.type = type

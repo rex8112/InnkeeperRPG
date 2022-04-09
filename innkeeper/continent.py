@@ -1,13 +1,14 @@
 from typing import Dict, List, Union
 
-from .base_classes.base_object import BaseObject
+from .abc import UniqueObject, WorldObject
 from .town import Town
 from .world import World
 
 
-class Continent(BaseObject):
-    def __init__(self, world: World) -> None:
+class Continent(UniqueObject, WorldObject):
+    def __init__(self, world: World, id: int) -> None:
         super.__init__(world)
+        self.id = id
         self.name = 'New Continent'
         self.size = 100
         self.population = 0
@@ -27,6 +28,7 @@ class Continent(BaseObject):
 
     def to_dict(self) -> Dict[str, Union[str, int, float, None]]:
         return {
+            'id': self.id,
             'name': self.name,
             'size': self.size,
             'population': self.population,

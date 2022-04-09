@@ -1,4 +1,4 @@
-from .base_classes.base_object import BaseObject
+from .abc import UniqueObject
 from .continent import Continent
 from .world import World
 
