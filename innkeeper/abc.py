@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
+from typing import Optional
 
 from .snowflake_generator import SnowflakeGenerator
 from .world import World
@@ -11,12 +12,17 @@ class UniqueObject(ABC):
     def id(self) -> int:
         pass
 
+    @property
+    @abstractmethod
+    def entry(self) -> Optional[object]:
+        pass
+
     @abstractmethod
     async def save(self) -> None:
         pass
 
-    @abstractmethod
     @classmethod
+    @abstractmethod
     async def load(cls, world: World, id: int) -> 'UniqueObject':
         pass
 
