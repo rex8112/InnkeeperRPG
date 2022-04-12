@@ -20,6 +20,6 @@ class World:
         self._kingdoms: List[Kingdom] = [] # TODO: Kingdom Manager Class
         self._towns: List[Town] = [] # TODO: Town Manager Class
         
-    def get_new_id(self) -> int:
+    def request_new_id(self) -> int:
         new_id = self.snowflake.get_new_id()
         return new_id

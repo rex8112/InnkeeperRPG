@@ -8,9 +8,9 @@ class SnowflakeGenerator:
     def __init__(self, worker_id: int) -> None:
         self.worker_id = worker_id
         self.id_counter = 0
-        self.id_counter_lock = threading.Lock()
-        self.id_counter_lock.acquire()
-        self.id_counter_lock.release()
+        self._lock = threading.Lock()
+        self._lock.acquire()
+        self._lock.release()
 
     #Static methods
     @staticmethod
@@ -26,7 +26,7 @@ class SnowflakeGenerator:
         [63-22] Seconds since epoch+1640995200
         [21-17] Worker id
         [16-0] Id counter"""
-        self.id_counter_lock.acquire()
+        self._lock.acquire()
 
         count = self.id_counter
         self.id_counter += 1
@@ -36,7 +36,7 @@ class SnowflakeGenerator:
 
         new_id = first | second | third
 
-        self.id_counter_lock.release()
+        self._lock.release()
         return new_id
 
     def get_time_since_start(self) -> int:
