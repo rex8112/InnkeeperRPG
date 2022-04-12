@@ -1,8 +1,6 @@
 import threading
 import datetime
 
-from .world import World
-
 
 class SnowflakeGenerator:
     start_date = datetime.datetime(2022, 1, 1, tzinfo=datetime.timezone.utc)
