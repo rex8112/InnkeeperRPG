@@ -1,10 +1,12 @@
 from django.forms.models import model_to_dict
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from .abc import UniqueObject, WorldObject
 from .models import Player as PlayerModel
 from .world import World
 
+if TYPE_CHECKING:
+    from django.contrib.auth.models import User
 
 class Player(UniqueObject, WorldObject):
     __slots__ = (
@@ -23,6 +25,7 @@ class Player(UniqueObject, WorldObject):
         self.id = id
         self.name = 'New Player'
         self.entry: Optional[PlayerModel] = None
+        self.user: Optional[User] = None
         self.characters = {}
         self.settings = {}
         self.flags = []
@@ -48,6 +51,7 @@ class Player(UniqueObject, WorldObject):
         data = model_to_dict(entry)
         player = cls.from_dict(world, data)
         player.entry = entry
+        player.user = entry.user
         return player
 
     # Instance Methods
@@ -60,5 +64,8 @@ class Player(UniqueObject, WorldObject):
         }
 
     def save(self) -> None:
-        self.entry = PlayerModel(**self.to_dict())
+        """Saves the player to the database."""
+        if (self.user is None):
+            raise ValueError('Player must have a user.')
+        self.entry = PlayerModel(**self.to_dict(), user=self.user)
         self.entry.save()

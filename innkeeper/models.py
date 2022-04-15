@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Player(models.Model):
@@ -6,6 +7,7 @@ class Player(models.Model):
     name = models.CharField(max_length=26)
     settings = models.JSONField()
     flags = models.JSONField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 class Character(models.Model):
     id = models.BigIntegerField(primary_key=True)

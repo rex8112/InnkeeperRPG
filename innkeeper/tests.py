@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.test import TestCase
 
 from .world import World
@@ -8,8 +9,10 @@ class PlayerTest(TestCase):
         """
         Test that a player can be created.
         """
+        user = User.objects.create_user('john', 'john@test.com', 'johnpassword')
         world = World('Test World', 1)
         player = Player(world, 1)
+        player.user = user
         self.assertEqual(player.id, 1)
         self.assertEqual(player.name, 'New Player')
         self.assertEqual(player.settings, {})
@@ -24,8 +27,10 @@ class PlayerTest(TestCase):
         """
         Test that a player can be loaded.
         """
+        user = User.objects.create_user('john', 'john@test.com', 'johnpassword')
         world = World('Test World', 1)
         player = Player(world, 1)
+        player.user = user
         player.save()
 
         player = Player.load(world, 1)
