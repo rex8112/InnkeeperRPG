@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING, List
 from .snowflake_generator import SnowflakeGenerator
+from .caches.player_cache import PlayerCache
 
 if TYPE_CHECKING:
     from .continent import Continent
@@ -13,7 +14,7 @@ class World:
 
         self.snowflake = SnowflakeGenerator(worker_id)
 
-        self._players = [] # TODO: Player Manager Class
+        self._players = PlayerCache(self) # TODO: Player Manager Class
         self._characters = [] # TODO: Character Manager Class
 
         self._continents: List[Continent] = [] # TODO: Continent Manager Class

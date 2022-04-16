@@ -3,11 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Player(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=26)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     settings = models.JSONField()
     flags = models.JSONField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 class Character(models.Model):
     id = models.BigIntegerField(primary_key=True)

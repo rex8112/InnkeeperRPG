@@ -7,7 +7,7 @@ class ContinentCache(CacheManager):
     def __init__(self, world: World) -> None:
         super().__init__(world)
 
-    # Private Methods
+    # Public Methods
 
-    async def _fetch_entry(self, key: str) -> Optional[object]:
+    async def fetch_entry(self, key: str) -> Optional[object]:
         pass # Implement database fetch here

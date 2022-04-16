@@ -5,10 +5,11 @@ from ..exceptions import NotFoundError
 
 if TYPE_CHECKING:
     from ..world import World
+    
 
 
 class CacheManager:
-    def __init__(self, world: World) -> None:
+    def __init__(self, world: 'World') -> None:
         self.world = world
         self._cache = {}
         self._cache_time = {}
@@ -32,11 +33,12 @@ class CacheManager:
             if datetime.datetime.now() - self._cache_time[key] > datetime.timedelta(hours=1):
                 self._remove_from_cache(key)
 
-    async def _fetch_entry(self, key: str) -> Optional[object]:
-        """Override this method to fetch from appropriate database table"""
-        pass
 
     # Public Methods
+
+    async def fetch_entry(self, key: str) -> Optional[object]:
+        """Override this method to fetch from appropriate database table"""
+        pass
 
     def get(self, key: str) -> Optional[object]:
         item = self._cache.get(key)
@@ -61,7 +63,7 @@ class CacheManager:
 
     async def fetch(self, key: str, force = True) -> object:
         if key not in self._cache or force:
-            value = self._fetch_entry(key)
+            value = self.fetch_entry(key)
             if value:
                 self._add_to_cache(key, value)
             else:

@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
-from typing import Optional
+from typing import TYPE_CHECKING, Optional
 
 from .snowflake_generator import SnowflakeGenerator
-from .world import World
+
+if TYPE_CHECKING:
+    from .world import World
 
 
 class UniqueObject(ABC):
@@ -23,7 +25,7 @@ class UniqueObject(ABC):
 
     @classmethod
     @abstractmethod
-    async def load(cls, world: World, id: int) -> 'UniqueObject':
+    async def load(cls, world: 'World', id: int) -> 'UniqueObject':
         pass
 
     @property
@@ -33,5 +35,5 @@ class UniqueObject(ABC):
 class WorldObject(ABC):
     @property
     @abstractmethod
-    def world(self) -> World:
+    def world(self) -> 'World':
         pass
