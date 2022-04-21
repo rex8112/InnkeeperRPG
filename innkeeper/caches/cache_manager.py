@@ -36,7 +36,7 @@ class CacheManager:
 
     # Public Methods
 
-    async def fetch_entry(self, key: str) -> Optional[object]:
+    def fetch_entry(self, key: str) -> Optional[object]:
         """Override this method to fetch from appropriate database table"""
         pass
 
@@ -61,7 +61,7 @@ class CacheManager:
             if func(obj):
                 yield key, obj
 
-    async def fetch(self, key: str, force = True) -> object:
+    def fetch(self, key: str, force = True) -> object:
         if key not in self._cache or force:
             value = self.fetch_entry(key)
             if value:

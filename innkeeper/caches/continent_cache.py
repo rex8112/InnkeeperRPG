@@ -9,5 +9,5 @@ class ContinentCache(CacheManager):
 
     # Public Methods
 
-    async def fetch_entry(self, key: str) -> Optional[object]:
+    def fetch_entry(self, key: str) -> Optional[object]:
         pass # Implement database fetch here
