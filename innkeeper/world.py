@@ -14,7 +14,7 @@ class World:
 
         self.snowflake = SnowflakeGenerator(worker_id)
 
-        self._players = PlayerCache(self) # TODO: Player Manager Class
+        self.players = PlayerCache(self) # TODO: Player Manager Class
         self._characters = [] # TODO: Character Manager Class
 
         self._continents: List[Continent] = [] # TODO: Continent Manager Class
