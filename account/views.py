@@ -18,5 +18,5 @@ class AccountView(LoginRequiredMixin, View):
     template_name = 'account/account.html'
 
     def get(self, request, *args, **kwargs):
-        player = settings.world
-        return render(request, self.template_name, {'user': request.user})
+        player = settings.world.players.fetch(request.user)
+        return render(request, self.template_name, {'user': request.user, 'player': player})
