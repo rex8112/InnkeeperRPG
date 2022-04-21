@@ -11,11 +11,11 @@ class PlayerTest(TestCase):
         """
         Test that a player can be created.
         """
-        user = User.objects.create_user('john', 'john@test.com', 'johnpassword')
+        user: User = User.objects.create_user('john', 'john@test.com', 'johnpassword')
         world = settings.world
         player = Player(world, user)
         self.assertEqual(player.user, user)
-        self.assertEqual(player.name, 'New Player')
+        self.assertEqual(player.name, user.username)
         self.assertEqual(player.settings, {})
         self.assertEqual(player.flags, [])
         self.assertEqual(player.characters, {})
@@ -28,14 +28,14 @@ class PlayerTest(TestCase):
         """
         Test that a player can be loaded.
         """
-        user = User.objects.create_user('john', 'john@test.com', 'johnpassword')
+        user: User = User.objects.create_user('john', 'john@test.com', 'johnpassword')
         world = settings.world
         player = Player(world, user)
         player.save()
 
         player = Player.load(world, user)
         self.assertEqual(player.user, user)
-        self.assertEqual(player.name, 'New Player')
+        self.assertEqual(player.name, user.username)
         self.assertEqual(player.settings, {})
         self.assertEqual(player.flags, [])
         self.assertEqual(player.characters, {})

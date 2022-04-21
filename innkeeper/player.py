@@ -22,7 +22,7 @@ class Player(UniqueObject, WorldObject):
 
     def __init__(self, world: 'World', user: 'User') -> None:
         self.world = world
-        self.name = 'New Player'
+        self.name = user.username
         self.entry: Optional[PlayerModel] = None
         self.user = user
         self.characters = {}
@@ -33,11 +33,13 @@ class Player(UniqueObject, WorldObject):
     
     # Class Methods
     @classmethod
-    def from_dict(cls, world: 'World', data: dict) -> 'Player':
+    def from_dict(cls, world: 'World', user: 'User', data: dict) -> 'Player':
         """Create a new player from a dictionary."""
-        player = cls(world, data['user'])
+        player = cls(world, user)
         player.settings = data['settings']
         player.flags = data['flags']
+        if user.id != data['user']:
+            raise ValueError('User does not match.')
         return player
 
     @classmethod
@@ -47,9 +49,8 @@ class Player(UniqueObject, WorldObject):
         if (entry is None):
             return None
         data = model_to_dict(entry)
-        player = cls.from_dict(world, data)
+        player = cls.from_dict(world, user, data)
         player.entry = entry
-        player.user = entry.user
         return player
 
     # Instance Methods
